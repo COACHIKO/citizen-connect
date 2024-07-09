@@ -156,17 +156,17 @@ class _ProgressScreenState extends State<ProgressScreen> {
                               description != null &&
                               location != null) {
                             await uploadingImage(
-                                pickedImage!.path,
-                                widget.category == "Road"
-                                    ? "road"
-                                    : widget.category == "Environmental"
-                                        ? "env"
-                                        : widget.category == "Electric"
-                                            ? "electric"
-                                            : "other",
-                                description,
-                                location!.latitude.toString(),
-                                location!.longitude.toString());
+                              description,
+                              pickedImage!.path,
+                              widget.category == "Road"
+                                  ? "road"
+                                  : widget.category == "Environmental"
+                                      ? "env"
+                                      : widget.category == "Electric"
+                                          ? "electric"
+                                          : "other",
+                              location,
+                            );
                           } else {
                             print('Form is incomplete.');
                           }
@@ -222,7 +222,8 @@ Future<Position> checkLocationPermission() async {
   return position;
 }
 
-Future<void> uploadingImage(descrtiption, x, y, String filePath, cat) async {
+Future<void> uploadingImage(
+    descrtiption, String filePath, cat, posistion) async {
   var headers = {
     'Authorization': 'token ${myServices.sharedPreferences.getString("token")}'
   };
@@ -241,9 +242,12 @@ Future<void> uploadingImage(descrtiption, x, y, String filePath, cat) async {
   }
 
   request.fields.addAll({
-    'description': 'Description', // Replace with actual description if needed
-    'latitude': x, // Replace with actual latitude if needed
-    'longitude': y // Replace with actual longitude if needed
+    'description':
+        descrtiption.toString(), // Replace with actual description if needed
+    'latitude':
+        posistion.latitude.toString(), // Replace with actual latitude if needed
+    'longitude': posistion.longitude
+        .toString() // Replace with actual longitude if needed
   });
 
   request.files.add(await http.MultipartFile.fromPath('image', filePath));

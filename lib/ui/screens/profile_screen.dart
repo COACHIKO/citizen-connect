@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/main.dart';
 import 'package:flutter_demo/ui/utils/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -73,11 +74,9 @@ class ProfileScreen extends StatelessWidget {
                             title: 'Logout',
                             icon: 'assets/images/Icon Logout.png',
                             onTap: () {
-                              SharedPreferences.getInstance().then((prefs) {
-                                prefs.setBool('is_logged_in', false);
-                              });
-                              Navigator.of(context)
-                                  .pushNamedAndRemoveUntil('/login', (route) => false);
+                              myServices.sharedPreferences.clear();
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                  '/login', (route) => false);
                             },
                           ),
                         ],

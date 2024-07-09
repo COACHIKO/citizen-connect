@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 2), () async {
       if (myServices.sharedPreferences.getString("token") != null) {
-        Navigator.of(context).pushReplacementNamed('/home');
+        Navigator.of(context).pushReplacementNamed('/main');
       } else {
         Navigator.of(context).pushReplacementNamed('/hello');
       }

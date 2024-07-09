@@ -18,7 +18,7 @@ class NotificationsScreen extends StatelessWidget {
           const SizedBox(height: 30),
           Expanded(
             child: ListView.builder(
-              itemCount: 2,
+              itemCount: 1,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               itemBuilder: (context, index) {
                 return Expanded(
@@ -31,7 +31,7 @@ class NotificationsScreen extends StatelessWidget {
                             fontSize: 18, fontWeight: FontWeight.w700),
                       ),
                       ListView.builder(
-                        itemCount: 0,
+                        itemCount: 1,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, i) {

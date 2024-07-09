@@ -175,7 +175,7 @@ Future<void> loginUser({
     myServices.sharedPreferences.setString("phoneNumber", phone);
     myServices.sharedPreferences.setString("fullName", map['full_name']);
     myServices.sharedPreferences.setString("token", map['token']);
-    Get.offAllNamed("/home");
+    Get.offAllNamed("/main");
   } else {
     Fluttertoast.showToast(
       msg: "Login failed",
