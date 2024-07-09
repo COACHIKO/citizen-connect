@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/model/report_model.dart';
-import 'package:flutter_demo/ui/utils/colors.dart';
+import 'package:intl/intl.dart';
 
 class TimelineCardItem extends StatelessWidget {
   final Report report;
@@ -8,6 +8,9 @@ class TimelineCardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String formattedDate =
+        DateFormat('yyyy-MM-dd HH:mm:ss').format(report.createdAt);
+
     return Card(
       color: Colors.white,
       elevation: 5,
@@ -36,12 +39,16 @@ class TimelineCardItem extends StatelessWidget {
                         maxLines: null,
                         overflow: TextOverflow.visible,
                       ),
-                      Text(
-                        '${report.createdAt.toIso8601String()} | Asyut',
-                        style: const TextStyle(
-                          fontSize: 13,
-                          color: Color(0xFFAB6585),
-                        ),
+                      Column(
+                        children: [
+                          Text(
+                            '$formattedDate | Egypt',
+                            style: const TextStyle(
+                              fontSize: 13,
+                              color: Color(0xFFAB6585),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

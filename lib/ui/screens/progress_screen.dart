@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/ui/screens/home_screen.dart';
 import 'package:flutter_demo/ui/utils/colors.dart';
 import 'package:flutter_demo/ui/widgets/back_button.dart';
 import 'package:flutter_demo/ui/widgets/check_circle.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
@@ -161,7 +163,10 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                         ? "env"
                                         : widget.category == "Electric"
                                             ? "electric"
-                                            : "other");
+                                            : "other",
+                                description,
+                                location!.latitude.toString(),
+                                location!.longitude.toString());
                           } else {
                             print('Form is incomplete.');
                           }
@@ -217,7 +222,7 @@ Future<Position> checkLocationPermission() async {
   return position;
 }
 
-Future<void> uploadingImage(String filePath, cat) async {
+Future<void> uploadingImage(descrtiption, x, y, String filePath, cat) async {
   var headers = {
     'Authorization': 'token ${myServices.sharedPreferences.getString("token")}'
   };
@@ -237,8 +242,8 @@ Future<void> uploadingImage(String filePath, cat) async {
 
   request.fields.addAll({
     'description': 'Description', // Replace with actual description if needed
-    'latitude': '30.1381478', // Replace with actual latitude if needed
-    'longitude': '31.3368201' // Replace with actual longitude if needed
+    'latitude': x, // Replace with actual latitude if needed
+    'longitude': y // Replace with actual longitude if needed
   });
 
   request.files.add(await http.MultipartFile.fromPath('image', filePath));
@@ -254,6 +259,7 @@ Future<void> uploadingImage(String filePath, cat) async {
         backgroundColor: Colors.green,
         textColor: Colors.white,
       );
+      Get.offAll(const HomeScreen());
     } else {
       Fluttertoast.showToast(
         msg: "Error Occured",

@@ -13,7 +13,8 @@ class NotificationsScreen extends StatelessWidget {
           child: Column(
         children: [
           const SizedBox(height: 10),
-          const SmallAppbar(title: 'Notifications', color: AppColors.yellowColor),
+          const SmallAppbar(
+              title: 'Notifications', color: AppColors.yellowColor),
           const SizedBox(height: 30),
           Expanded(
             child: ListView.builder(
@@ -26,10 +27,11 @@ class NotificationsScreen extends StatelessWidget {
                     children: [
                       Text(
                         index == 0 ? 'Today' : 'Yesterday',
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w700),
                       ),
                       ListView.builder(
-                        itemCount: 3,
+                        itemCount: 0,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, i) {
